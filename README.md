@@ -8,17 +8,17 @@ Type the following command to see the help message:
 
 You should see the message like below: 
 
-**About this program: **
+About this program: 
 
 This program/script performs multi-curves fitting of the input coordinates (2D).
 
 Supported file formats: relion star file format(end with .star) or 2-column txt file format(end with .txt)
 
-**Usage:** 
+Usage: 
 
 python3 mcurve_fitting_2D.py [options] <coordinates_files>
 
-**Example of usage: **
+Example of usage:
 
 python3 mcurve_fitting_2D.py --pixel_size_ang 1.33 --sample_step_ang 41 --poly_expon 3 Falcon*.star
 
