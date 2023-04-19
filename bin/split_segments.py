@@ -34,7 +34,6 @@ if len(sys.argv[:]) == 1:
 
     print()
     exit(-1)
-n
 
 for txtfile in txtfiles:
     print("Processing " + txtfile + " >>>>>>>>>>>")
