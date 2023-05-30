@@ -3,7 +3,9 @@
 import sys
 import os
 import math
-segment_num = 20
+import random
+
+segment_nums = [12, 13, 14, 15, 16, 17, 18]
 txtfiles = sys.argv[1:]
 
 
@@ -23,7 +25,7 @@ class color:
 if len(sys.argv[:]) == 1:
     print()
     print(color.RED + color.BOLD + "About this program: " + color.END)
-    print("This program will further split the segments into smaller segments. Each segment will have 20 coordinates.")
+    print("This program will further split the segments into smaller segments. Each segment will have 12-17 coordinates.")
 
     print(color.GREEN + color.BOLD + "Arguments: " + color.END)
     print(
@@ -34,6 +36,7 @@ if len(sys.argv[:]) == 1:
 
     print()
     exit(-1)
+
 
 for txtfile in txtfiles:
     print("Processing " + txtfile + " >>>>>>>>>>>")
@@ -51,6 +54,7 @@ for txtfile in txtfiles:
             Z.append(int(newline[3]))
     total_particles = len(X)
     if total_particles == 0:
+        print("No particles. Skipped. Not outputing files.")
         continue
 
     cnt = 0
@@ -58,6 +62,7 @@ for txtfile in txtfiles:
     new_Z = [0 for i in range(total_particles)]
     curve = Z[0]
     for i in range(total_particles):
+        segment_num = random.choice(segment_nums)
         if Z[i] == cur_curve:
             if cnt < segment_num:
                 cnt = cnt + 1
@@ -66,12 +71,29 @@ for txtfile in txtfiles:
                 cnt = 0
                 curve = curve + 1
                 new_Z[i] = curve
+                # print(segment_num)
 
         else:
+
             cnt = 0
             cur_curve = Z[i]
             curve = curve + 1
             new_Z[i] = curve
+            # print(segment_num)
+
+    uniq_Z = set(new_Z)
+    # print(uniq_Z)
+    for z in uniq_Z:
+        cnt = 0
+        for i in range(total_particles):
+            if new_Z[i] == z:
+                cnt = cnt + 1
+        # print(cnt)
+        if cnt < 10:
+            for i in range(total_particles):
+                if new_Z[i] == z:
+                    new_Z[i] = z-1
+
     with open(outputname, "w") as f:
         for i in range(total_particles):
             f.write(str(X[i]) + " " + str(Y[i]) + " " +
