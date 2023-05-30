@@ -123,7 +123,7 @@ def resample(poly, left, right, mode, sample_step, cluster):
         output_resam_Zscore.write("0.500000" + "\n")
         output_resam_Zscore_txt.write(str(current_x) + " ")
         output_resam_Zscore_txt.write(str(current_y) + " ")
-        output_resam_Zscore_txt.write(str(angle) + " ")
+        output_resam_Zscore_txt.write(str(-angle) + " ")
         output_resam_Zscore_txt.write(str(cluster+1) + "\n")
 
         count = 1
@@ -147,7 +147,7 @@ def resample(poly, left, right, mode, sample_step, cluster):
                 count += 1
                 output_resam_Zscore_txt.write(str(current_x) + " ")
                 output_resam_Zscore_txt.write(str(current_y) + " ")
-                output_resam_Zscore_txt.write(str(angle) + " ")
+                output_resam_Zscore_txt.write(str(-angle) + " ")
                 output_resam_Zscore_txt.write(str(cluster+1) + "\n")
             current_x = next_x
             current_y = next_y
@@ -177,7 +177,7 @@ def resample(poly, left, right, mode, sample_step, cluster):
 
         output_resam_Zscore_txt.write(str(current_x) + " ")
         output_resam_Zscore_txt.write(str(current_y) + " ")
-        output_resam_Zscore_txt.write(str(angle) + " ")
+        output_resam_Zscore_txt.write(str(-angle) + " ")
         output_resam_Zscore_txt.write(str(cluster+1) + "\n")
         count = 1
         while current_y < right:
@@ -211,7 +211,7 @@ def resample(poly, left, right, mode, sample_step, cluster):
 
                 output_resam_Zscore_txt.write(str(current_x) + " ")
                 output_resam_Zscore_txt.write(str(current_y) + " ")
-                output_resam_Zscore_txt.write(str(angle) + " ")
+                output_resam_Zscore_txt.write(str(-angle) + " ")
                 output_resam_Zscore_txt.write(str(cluster+1) + "\n")
             current_x = next_x
             current_y = next_y
