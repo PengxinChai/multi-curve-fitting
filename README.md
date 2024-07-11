@@ -1,3 +1,9 @@
+#Download
+
+git clone https://github.com/PengxinChai/multi-curve-fitting
+
+git clone https://github.com/PengxinChai/tubulin-lattice-subtraction
+
 # multi-curve fitting
 This folder contains the python scripts to perform multi-curves fitting and other scripts for relion starfile processing. 
 
