@@ -380,7 +380,7 @@ def print_help_message():
           "Final sampling step, usually the length of repeating unit. 41 is the length of tubulin subunit, in angstrom")
     print('{:30s} {:20s}'.format("--intergration_step_ang", "1") +
           "Intergration step during curve length calculation(resampling). in angstrom. 1~5 is generaly good. The bigger the faster, but less accurate.")
-    print('{:30s} {:20s}'.format("--poly_expon", "3") +
+    print('{:30s} {:20s}'.format("--poly_expon", "2") +
           "The polynomial factor during the curve growth and final resampling steps.")
 
     print('{:30s} {:20s}'.format(
@@ -397,7 +397,7 @@ def print_help_message():
           "The maximal distance between neighbor points, in angstrom.")
     print('{:30s} {:20s}'.format("--poly_expon_seed", "2") +
           "The polymomial factor for seed evaluation (see the following two parameters). 2 or 3 is good. Not recommended to use bigger values.")
-    print('{:30s} {:20s}'.format("--max_seed_fitting_error", "1") +
+    print('{:30s} {:20s}'.format("--max_seed_fitting_error", "3") +
           "When the initial seed is found,the program fits an intial function. The maximal error for the fitting. 1~5 are good. ")
     print('{:30s} {:20s}'.format("", "") +
           "If the points are well-centered, use smaller value.")
@@ -406,11 +406,11 @@ def print_help_message():
 
     print('{:30s} {:20s}'.format(
         "\nOptions for seed growth and evaluation", ""))
-    print('{:30s} {:20s}'.format("--max_dis_to_curve_ang", "40") +
+    print('{:30s} {:20s}'.format("--max_dis_to_curve_ang", "50") +
           "If the point is close to this curve (and meets the next two requirements), the point is added and the function is updated. in angstrom.")
     print('{:30s} {:20s}'.format("--min_dis_neighbor_curve_ang", "60") +
           "The minimal distance between neighbor points, usually the same as seed parameters. in angstrom.")
-    print('{:30s} {:20s}'.format("--max_dis_neighbor_curve_ang", "320") +
+    print('{:30s} {:20s}'.format("--max_dis_neighbor_curve_ang", "400") +
           "The maximal distance between neighbor points, usually the same as seed parameters. in angstrom.")
     print('{:30s} {:20s}'.format("--min_number_growth", "0") +
           "The minimal number of points added. This number plus min_number_seed together define the minimal number of the curve.")
@@ -432,17 +432,17 @@ arguments = {}
 arguments["pixel_size_ang"] = "1.33"
 arguments["sample_step_ang"] = "41"
 arguments["intergration_step_ang"] = "1"
-arguments["poly_expon"] = "3"
+arguments["poly_expon"] = "2"
 arguments["min_number_seed"] = "5"
 arguments["max_dis_to_line_ang"] = "50"
 arguments["min_dis_neighbor_seed_ang"] = "60"
 arguments["max_dis_neighbor_seed_ang"] = "320"
 arguments["poly_expon_seed"] = "2"
-arguments["max_seed_fitting_error"] = "1"
+arguments["max_seed_fitting_error"] = "3"
 arguments["max_angle_change_per_4nm"] = "0.5"
 arguments["max_dis_to_curve_ang"] = "40"
 arguments["min_dis_neighbor_curve_ang"] = "60"
-arguments["max_dis_neighbor_curve_ang"] = "320"
+arguments["max_dis_neighbor_curve_ang"] = "400"
 arguments["min_number_growth"] = "0"
 arguments["files"] = []
 
