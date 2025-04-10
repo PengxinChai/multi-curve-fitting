@@ -157,3 +157,94 @@ ln -s ../ori_mics/*doseweighted.mrc .
 ## 🚀 Continue Processing in cryoSPARC
 
 Use the new micrographs in your next cryoSPARC pipeline steps (e.g., re-extraction, refinement, etc).
+
+
+
+
+
+---
+---
+
+### OLD ###
+# Tubulin Lattice Signal Subtraction for Cryo-EM Images
+
+This repository contains the C code and documentation to perform tubulin lattice signal subtraction in cryo-EM images.
+
+## Program Overview
+
+The provided C program can subtract tubulin lattice signals from cryo-EM images. There are two main programs:
+
+- **`mrc_2d_curve_weaken_dynamic_mask`**: For processing microtubule doublets.
+- **`mrc_2d_curve_weaken`**: For processing microtubule singlets or filaments with similar diameters.
+
+The signal subtraction works by dynamically adjusting the width of the mask to match the repeating unit of the microtubule, allowing for more accurate removal of lattice signals.
+
+## Usage
+
+In the `bin` directory, you will find the compiled C programs and a bash script to run the program.
+
+### Command Syntax
+
+```bash
+mrc_2d_curve_weaken_dynamic_mask <mrc> <mask> <coords_file> <scale_factor> <left_search_start> <left_search_end>
+mrc_2d_curve_weaken <mrc> <mask> <coords_file> <scale_factor>
+```
+
+- **`<mrc>`**: Input MRC file (must end with `.mrc`).
+- **`<mask>`**: Mask file for signal subtraction.
+- **`<coords_file>`**: A text file with four columns: `X, Y, angle, cluster` (e.g., from multi-curve fitting or other methods).
+- **`<scale_factor>`**: Controls the extent of signal subtraction (0 means full subtraction, 1 means no subtraction).
+- **`<left_search_start>` / `<left_search_end>`**: Defines the search range for the dynamic mask (for doublets only).
+
+### Mask Requirements
+
+- **Y-axis** of the mask should align with the major axis of the filament.
+- The **length** of the mask should match the repeating unit length (in pixels).
+- The **width** of the mask should be slightly larger than the largest filament width in pixels.
+
+### Choosing the Correct Program
+
+- **Singlets/Similar Diameters**: Use `mrc_2d_curve_weaken`.
+- **Doublets**: Use `mrc_2d_curve_weaken_dynamic_mask`.
+
+You may need to experiment with the search range by visualizing the average segments after an initial trial to adjust for optimal subtraction.
+
+## Test the Program
+
+To test the program, download the example files from the `TestData` folder to your Linux workstation and run the following command:
+
+```bash
+mrc_2d_curve_weaken_dynamic_mask slot12_02441_F40_MC2_DW_shrink2.mrc MTD_mask_528_32.mrc slot12_02441_F40_MC2_DW_shrink2_MultiCurvesFit.txt 0 60 180
+```
+
+## Visualize the Results
+
+After running the program, open the original MRC file and the subtracted MRC file (`sub.mrc`). You should see a comparison like this:
+
+![Original and Subtracted Images](https://user-images.githubusercontent.com/83961552/145240541-143ae9fc-c2ac-4499-a888-7d90518c007c.png)
+
+- **Left**: Original image
+- **Right**: Image after tubulin-lattice signal subtraction
+
+## Preparing Input Files
+
+### Coordinate File
+
+To perform 2D averaging and signal subtraction, the program needs the coordinates of the repeating units in each filament. The coordinate file should be a 4-column text file with the following information:
+
+- **X**: X position of the particle
+- **Y**: Y position of the particle
+- **Angle**: In-plane rotation angle (psi)
+- **Cluster**: Helical tube ID (Cluster)
+
+You can generate this file using the multi-curves fitting program or any other method that outputs the required format.
+
+### Mask File
+
+A mask file is needed for averaging and subtraction. It should cover the repeating distance of the microtubule and dynamically adjust during processing. We provide common mask files for microtubule singlets and doublets with a pixel size of 1 Å, but you can scale the mask according to the pixel size of your image.
+
+---
+
+This README should be structured for easy reference and use on GitHub. Let me know if you need any further adjustments!
+
+  
